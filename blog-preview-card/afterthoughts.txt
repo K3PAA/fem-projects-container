@@ -1,0 +1,55 @@
+CSS Cascade Layers
+
+Normally when we write CSS we have three layers. The user agent styles, user styles, and authr styles.
+The direct access we have only for author styles.
+
+User agent styles -> The first layer, everything can override it. It usually are browser default values like h1 which is bigger font.
+User styles -> not really a thing ( something in between author styles and user agent styles ), extension in browser?.
+Author styles -> what we write in CSS, it overrides all user agent styles, so when we use * that have 0 specificity it stills overrides
+
+Order of specificity:
+1. User styles marked as !importnat
+2. Author styles marked as !important
+3. Author styles
+4. User styles
+5. User Agent styles ( browser defaults, different on every browser so appearance is not consitent )
+
+CSS reset
+Neutralizes the user agent styles, giving us consistent starting point across all browsers.
+
+  /* Prevent font size inflation */
+  In days when mobile concern was a thing because not of layout that considered them that much it helped with readability by changing the font size, now it can make layout seem off.
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+
+
+Using @layer convention, we can create our own layers inside author styles. When we do use layer styles, then if some item is outside of it it will always have higher specificity.
+
+Layers basically works that everything that is put in layer that is later in the file have higher specificity than layers before. 
+Even if there is some #id .item .item-1 #bla ( high specificity ), then it will be override in other layer with .item ( lower specificity ).
+
+Because of that layer system we should configure our css file to go from most basic selectors to more advanced. That way we will not have any specificity problems. Also if we have 
+
+@layer base {} // most general styling 
+@layer ... {}
+@layer ... {}
+@layer ... {}
+ 
+@layer base {} // Elements inside will have lower specificity, because base was already used, so it is thought to be the least specific selector.
+
+On top of a file we can specify how things should be ordered so it helps with project structure down the road.
+Not declared yet, just specified the order of specificity.
+@layer reset, base, layout, compoennts, utilities;
+
+One thing to be aware is that if inside our layer we use !important keyword than the order reverses, so if few layers uses this keyword then instead of base !importnat on style overriding the reset layer. It won't happen ( Only for !important ).
+
+In this project I will try using css cascade layers and learn why this approach might be beneficial.
+
+
+AFTER THOUGHTS
+
+Wierd CSS RESET, I prefer to remove all margins
