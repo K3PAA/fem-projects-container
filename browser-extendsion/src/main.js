@@ -64,6 +64,7 @@ const createCard = (element) => {
   topCardWrapper.append(textWrapper)
 
   const button = document.createElement('button')
+  button.classList.add('remove')
   button.textContent = 'remove'
   bottomCardWrapper.append(button)
 
@@ -90,7 +91,9 @@ extensionsData.forEach((element) => {
 const renderContent = (type) => {
   const cards = document.querySelectorAll('.card')
   cards.forEach((card, i) => {
-    if (type === 'inactive') {
+    if (card.getAttribute('removed') === 'true') {
+      card.classList.add('hidden')
+    } else if (type === 'inactive') {
       if (extensionsData[i].isActive) card.classList.add('hidden')
       else card.classList.remove('hidden')
     } else if (type === 'active') {
@@ -132,4 +135,13 @@ themeButton.addEventListener('click', () => {
   toogleTheme()
   themeIcon.src = theme === 'dark' ? sun : moon
   logo.src = theme === 'dark' ? logoLight : logoDark
+})
+
+const cards = document.querySelectorAll('.card')
+cards.forEach((card) => {
+  const button = card.querySelector('.remove')
+  button.addEventListener('click', () => {
+    card.setAttribute('removed', 'true')
+    renderContent()
+  })
 })

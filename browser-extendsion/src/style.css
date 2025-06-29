@@ -199,7 +199,7 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(
-      auto-fit,
+      auto-fill,
       minmax(min(100%, var(--min-item-size)), 1fr)
     );
   }
@@ -279,6 +279,12 @@
     background-color: var(--clr-button-bg-active);
     border-color: var(--clr-button-border-active);
     color: var(--clr-button-text-active);
+  }
+
+  .remove:hover {
+    background-color: var(--clr-button-bg-active);
+    color: var(--clr-button-text-active);
+    border: 1px solid var(--clr-button-border-active);
   }
 
   @media (width < 800px) {
