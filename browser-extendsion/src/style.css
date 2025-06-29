@@ -1,0 +1,297 @@
+@font-face {
+  font-family: 'NotoSans';
+  src: url('/public/assets/fonts/NotoSans-VariableFont_wdth\,wght.ttf');
+}
+
+:root {
+  --ff-primary: 'NotoSans', sans-serif;
+
+  --fs-700: 3rem;
+  --fs-600: 2rem;
+  --fs-500: 1.5rem;
+  --fs-400: 1.25rem;
+  --fs-300: 1rem;
+
+  --clr-neutral-900: hsl(227, 75%, 14%);
+  --clr-neutral-800: hsl(226, 25%, 17%);
+  --clr-neutral-700: hsl(225, 23%, 24%);
+  --clr-neutral-600: hsl(226, 11%, 37%);
+
+  --clr-neutral-400: hsl(0, 0%, 78%);
+  --clr-neutral-300: hsl(217, 61%, 90%);
+  --clr-neutral-200: hsl(0, 0%, 93%);
+  --clr-neutral-100: hsl(200, 60%, 99%);
+
+  --clr-primary-700: hsl(3, 77%, 44%);
+  --clr-primary-500: hsl(3, 71%, 56%);
+  --clr-primary-400: hsl(3, 86%, 64%);
+
+  --light-gradient: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
+  --dark-gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+
+  --gradient: var(--light-gradient);
+  --clr-foreground: var(--clr-neutral-100);
+
+  --clr-foreground-title: var(--clr-neutral-900);
+  --clr-foreground-text: var(--clr-neutral-800);
+  --clr-foreground-border: var(--clr-neutral-400);
+
+  --clr-button-border: var(--clr-neutral-400);
+  --clr-button-text: var(--clr-neutral-900);
+  --clr-button-bg: var(--clr-foreground);
+
+  --clr-button-bg-active: var(--clr-primary-700);
+  --clr-button-text-active: var(--clr-neutral-100);
+  --clr-button-border-active: var(--clr-primary-700);
+
+  --clr-toggle-button: var(--clr-foreground-text);
+  --clr-toggle-bg: var(--clr-neutral-400);
+}
+
+[data-theme='dark'] {
+  --gradient: var(--dark-gradient);
+  --clr-foreground: var(--clr-neutral-700);
+
+  --clr-foreground-title: var(--clr-neutral-100);
+  --clr-foreground-text: var(--clr-neutral-100);
+  --clr-foreground-border: var(--clr-neutral-600);
+
+  --clr-button-border: var(--clr-neutral-600);
+  --clr-button-text: var(--clr-neutral-100);
+  --clr-button-bg: var(--clr-foreground);
+
+  --clr-button-bg-active: var(--clr-primary-500);
+  --clr-button-text-active: var(--clr-neutral-900);
+  --clr-button-border-active: var(--clr-primary-500);
+
+  --clr-toggle-button: var(--clr-foreground-text);
+  --clr-toggle-bg: var(--clr-neutral-600);
+}
+
+@layer reset {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  :target {
+    scroll-margin-block: 5ex;
+  }
+}
+
+@layer base {
+  body {
+    transition: all 300ms ease;
+    min-height: 100vh;
+    font-family: var(--ff-primary);
+    background: var(--gradient);
+  }
+
+  header {
+    transition: all 300ms ease;
+    background-color: var(--clr-foreground);
+    padding: 1rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  main {
+    margin-top: 3rem;
+  }
+
+  button {
+    transition: all 300ms ease;
+    text-transform: capitalize;
+    color: var(--clr-button-text);
+    background-color: var(--clr-button-bg);
+    border: 1px solid var(--clr-button-border);
+    padding: 0.75rem 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+
+  h1 {
+    transition: all 300ms ease;
+    color: var(--clr-foreground-title);
+    font-size: var(--fs-700);
+    font-weight: bold;
+  }
+  h2 {
+    transition: all 300ms ease;
+    color: var(--clr-foreground-title);
+    font-size: var(--fs-600);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    transition: all 300ms ease;
+    color: var(--clr-foreground-text);
+    font-size: var(--fs-300);
+  }
+}
+
+@layer layout {
+  .content-wrapper {
+    --max-width: 1280px;
+    --padding: 1rem;
+
+    width: min(var(--max-width), calc(100% - var(--padding)));
+    margin-inline: auto;
+  }
+
+  .grid-responsive-container {
+    --min-item-size: 340px;
+
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--min-item-size)), 1fr)
+    );
+  }
+  .card-top {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+  }
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@layer components {
+  .extensions {
+    margin-block: 2rem;
+  }
+
+  .extensions-bar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .filter-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .card {
+    transition: all 300ms ease;
+    border-radius: 1rem;
+    background-color: var(--clr-foreground);
+    padding: 1rem;
+    border: 1px solid var(--clr-foreground-border);
+
+    display: grid;
+    max-width: 50ch;
+    gap: 3rem;
+    margin-inline: auto;
+  }
+
+  .toggle {
+    position: relative;
+    height: 30px;
+    width: 60px;
+    padding: 0;
+    background-color: var(--clr-toggle-bg);
+    transition: all 300ms ease;
+  }
+
+  .toggle.active {
+    background-color: var(--clr-primary-500);
+  }
+
+  .toggle.active .toggle-circle {
+    transform: translate(27px, -50%);
+  }
+
+  .toggle-circle {
+    transition: all 300ms ease;
+    position: absolute;
+    top: 50%;
+    left: 3px;
+
+    transform: translate(0, -50%);
+
+    height: 24px;
+    width: 24px;
+    background-color: var(--clr-toggle-button);
+    border-radius: 50%;
+  }
+
+  .filter-button.active {
+    background-color: var(--clr-button-bg-active);
+    border-color: var(--clr-button-border-active);
+    color: var(--clr-button-text-active);
+  }
+
+  @media (width < 800px) {
+    .extensions-bar {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
+
+@layer utils {
+  .hidden {
+    display: none;
+  }
+}
